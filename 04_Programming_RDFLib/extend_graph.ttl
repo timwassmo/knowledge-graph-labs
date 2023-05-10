@@ -1,0 +1,27 @@
+@prefix ex: <http://example.org/> .
+
+
+ex:Mueller_Investigation ex:involved ex:George_Papadopoulos,
+        ex:Michael_Cohen,
+        ex:Michael_Flynn,
+        ex:Paul_Manafort,
+        ex:Rick_Gates,
+        ex:Roger_Stone ;
+    ex:leadBy ex:Robert_Muller .
+
+ex:Paul_Manafort ex:businessManager ex:Rick_Gates ;
+    ex:campaignChairman ex:Donald_Trump ;
+    ex:chargedWith ex:ForeignLobbying,
+        ex:MoneyLaundering,
+        ex:TaxEvasion ;
+    ex:convictedFor ex:BankFraud,
+        ex:TaxFraud ;
+    ex:negoiated ex:PleaBargain ;
+    ex:pleadGuiltyTo ex:Conspiracy ;
+    ex:sentencedTo ex:Prison .
+
+ex:Rick_Gates ex:chargedWith ex:ForeignLobbying,
+        ex:MoneyLaundering,
+        ex:TaxEvasion ;
+    ex:pleadGuiltyTo ex:Conspiracy,
+        ex:LyingToFBI .
