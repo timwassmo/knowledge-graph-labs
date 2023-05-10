@@ -1,0 +1,50 @@
+@prefix ex: <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Mueller_Investigation ex:involved ex:George_Papadopoulos,
+        ex:Michael_Cohen,
+        ex:Michael_Flynn,
+        ex:Paul_Manafort,
+        ex:Rick_Gates,
+        ex:Roger_Stone ;
+    ex:leadBy ex:Robert_Muller .
+
+ex:Michael_Cohen ex:attorneyFor ex:Donald_Trump ;
+    ex:pleadGuilty [ ex:liedAbout "President Trump’s former attorney pleaded guilty to lying to Congress about a Trump real estate deal in Moscow he had worked on before the 2016 presidential election. Prosecutors allege that in an August 2017 letter Cohen sent to congressional committees investigating Russian election interference, he falsely stated that the project ended in January 2016. Mueller’s investigators also allege that Cohen falsely stated that he had never agreed to travel to Russia for the real estate deal and that he did not recall any contact with the Russian government about the project. He pleaded guilty Nov. 29, 2018."^^xsd:string ;
+            ex:liedTo ex:Congress ],
+        ex:Lying_to_congress .
+
+ex:Michael_Flynn ex:adviser ex:Donald_Trump ;
+    ex:negotiated ex:Plea_agreement ;
+    ex:pleadGuilty [ ex:liedTo ex:FBI ;
+            ex:negotiated ex:pleaAgreement ],
+        ex:Lying_to_FBI .
+
+ex:Paul_Manafort ex:businessManager ex:Rick_Gates ;
+    ex:businessPartner ex:Rick_Gates ;
+    ex:campaignChairman ex:Donald_Trump ;
+    ex:chargedWith ex:ForeignLobbying,
+        ex:MoneyLaundering,
+        ex:TaxEvasion ;
+    ex:convictedFor ex:BankFraud,
+        ex:TaxFraud ;
+    ex:negoiated ex:PleaBargain ;
+    ex:negotiated ex:PleaAgreement ;
+    ex:pleadGuilty ex:Conspiracy ;
+    ex:pleadGuiltyTo ex:Conspiracy ;
+    ex:sentencedTo ex:Prison .
+
+ex:Donald_Trump ex:lives_at [ a rdf:Seq ;
+            rdf:_1 [ ex:address "1100 S Ocean Blvd, Palm Beach, FL 33480, United States" ;
+                    ex:name "Mar-a-Lago Club" ] ;
+            rdf:_2 "The White House, 1600 Pennsylvania Ave., NW Washington, DC 20500, United States, phone: 1-202-456-1414" ] .
+
+ex:Rick_Gates ex:chargedWith ex:ForeignLobbying,
+        ex:MoneyLaundering,
+        ex:TaxEvasion ;
+    ex:pleadGuilty [ ],
+        ex:Conspiracy ;
+    ex:pleadGuiltyTo ex:Conspiracy,
+        ex:LyingToFBI .
+

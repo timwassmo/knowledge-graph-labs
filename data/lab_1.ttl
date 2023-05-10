@@ -1,0 +1,23 @@
+@prefix ex: <http://example.org/> .
+
+ex:Michael_Cohen ex:attorneyFor ex:Donald_Trump ;
+    ex:pleadGuilty ex:Lying_to_congress .
+
+ex:Michael_Flynn ex:adviser ex:Donald_Trump ;
+    ex:negotiated ex:Plea_agreement ;
+    ex:pleadGuilty ex:Lying_to_FBI .
+
+ex:Paul_Manafort ex:businessPartner ex:Rick_Gates ;
+    ex:campaignChairman ex:Donald_Trump ;
+    ex:chargedWith ex:ForeignLobbying,
+        ex:MoneyLaundering,
+        ex:TaxEvasion ;
+    ex:convictedFor ex:BankFraud,
+        ex:TaxFraud ;
+    ex:negotiated ex:PleaAgreement ;
+    ex:pleadGuilty ex:Conspiracy ;
+    ex:sentencedTo ex:Prison .
+
+ex:Rick_Gates ex:pleadGuilty ex:Conspiracy,
+        ex:LyingToFBI .
+
