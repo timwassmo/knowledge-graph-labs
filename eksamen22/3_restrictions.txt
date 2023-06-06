@@ -1,0 +1,40 @@
+41: An Organization is a kind of Agent.
+ex:Organization rdfs:subClassOf ex:Agent
+
+41: The object in an affiliation-triple is an Organization.
+ex:affiliation rdfs:range ex:Organization
+
+42: The subject in an affiliation-triple is an Author.
+ex:affiliation
+
+43: A Paper is published in only one Publication.
+ex:publication rdf:type owl:FunctionalProperty
+
+44: A Paper cannot have more than one publication year.
+ex:year rdf:type owl:FunctionalProperty
+
+45: A Paper cannot be its own publication.
+ex:publication rdf:type owl:IrreflexiveProperty
+
+46: publication is a transitive relation.
+ex:publication rdf:type owl:TransitiveProperty
+
+47: Different Author-s have different name-s.
+ex:name rdf:type ex.InverseFunctionalProperty
+
+48: An Author is not an Organization.
+ex:Author owl:disjointWith ex:Organization
+
+49: A Publication title is a string.
+ex:title rdfs:range xsd:string
+
+50: A Paper must have at least one author.
+ex:Paper rdfs:subClassOf [
+    owl:someValuesFrom ex:Author ;
+    owl:onProperty ex:author .
+    ] .
+
+ex:Paper rdfs:subClassOf [
+    owl:cardinallity 1 ;
+    owl:onProperty ex:author ;
+] .

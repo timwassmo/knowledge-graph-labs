@@ -1,0 +1,49 @@
+#Constraints:
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex:   <http://example.org/> .
+
+#Every person under investigation has exactly one name.
+ex:PersonUnderInvestigationShape
+    a              sh:NodeShape ;
+    sh:targetClass ex:PersonUnderInvestigation ;
+    sh:property    [ sh:path     foaf:name ;
+                     sh:minCount 1 ;
+                     sh:maxCount 1 ] ;
+#The object of a charged with property must be a URI.
+#The object of a charged with property must be an offense.
+
+    sh:property    [ sh:path     ex:chargedWith ;
+                     sh:nodeKind sh:IRI ;
+                     sh:class    ex:Offense ; ] ;
+#All person names must be language-tagged (hint: rdf:langString is a datatype!).
+    sh:property    [ sh:path     foaf:name ;
+                     sh:datatype rdf:langString ] .
+
+ex:IndictmentShape
+    a              sh:NodeShape ;
+    sh:targetClass ex:Indictment ;
+    sh:property    [ sh:path    ex:american ;
+                     sh:pattern "(true|unknown|false)" ] ;
+    sh:property    [ sh:path     ex:investigation_days ;
+                     sh:datatype xsd:integer ; ] ;
+    sh:property    [ sh:path     ex:investigation_start ;
+                     sh:datatype xsd:date ] ;
+    sh:property    [ sh:path ex:investigation_end ;
+                     sh:or   ( [ sh:datatype xsd:date ; ] [ sh:hasValue "unknown" ] ) ] ;
+    sh:property    [ sh:path     foaf:name ;
+                     sh:minCount 1 ;
+                     sh:maxCount 1 ; ] ;
+    sh:property    [ sh:path     ex:investigatedPerson ;
+                     sh:minCount 1 ;
+                     sh:maxCount 1 ;
+                     sh:class    ex:PersonUnderInvestigation ] ;
+    sh:property    [ sh:path     ex:president ;
+                     sh:class    ex:President ;
+                     sh:nodeKind sh:IRI ; ] .
+
+
+
+

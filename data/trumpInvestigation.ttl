@@ -43,8 +43,7 @@ ex:Donald_Trump ex:lives_at [ a rdf:Seq ;
 ex:Rick_Gates ex:chargedWith ex:ForeignLobbying,
         ex:MoneyLaundering,
         ex:TaxEvasion ;
-    ex:pleadGuilty [ ],
-        ex:Conspiracy ;
+
     ex:pleadGuiltyTo ex:Conspiracy,
         ex:LyingToFBI .
 

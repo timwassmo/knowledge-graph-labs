@@ -1,0 +1,53 @@
+select ?paperTitle
+where {
+    ?paper a ex:Paper ;
+           ex:title ?paperTitle.
+}
+
+select distinct ?name
+where {
+    ?org a ex:Organization ;
+         ex:publisher / ex:name ?name
+} order by ?name
+
+select ?author ?name
+where{
+    ?author a ex:Author .
+    ?name ex:name ?author
+    ?paper a ex:Paper .
+    ?paper ex:title ?title
+}
+
+PREFIX ex: <http://ex.org#>
+select ?country (count(?paper) as ?number)
+where {
+    ?author ex:country ?country .
+    ?paper ex:author / ex:country ?country
+} group by ?country
+
+select ?author
+where {
+    ?paper ex:author ?author
+} having (count(?author) > 1)
+
+PREFIX ex: <http://ex.org#>
+select ?author (count(?paper) as ?number)
+where {
+            ?author ^ex:name / ^ex:author ?paper
+} group by ?author
+
+PREFIX ex: <http://ex.org#>
+select ?name (count(?paper) as ?num)
+where {
+    ?name ^ex:name / ^ex:author ?paper.
+} group by ?name
+
+
+PREFIX ex: <http://ex.org#>
+select ?author
+where {
+    ?author a ex:Author .
+    minus {
+    ?author  ex:country ex:Germany
+    }
+}

@@ -1,0 +1,106 @@
+PREFIX ex: <http://example.org#>
+
+
+# Select all triples in your graph:
+select * where {
+    ?s ?p ?o
+}
+    # List the first 100 triples in your graph.
+select * where {
+    ?s ?p ?o
+}
+ORDER BY ?s
+LIMIT 100
+
+    # Count the number of triples in your graph.
+select (COUNT(*) as ?total) where {
+  ?s ?p ?o
+}
+
+# Count the number of indictments in your graph.
+PREFIX ex: <http://example.org#>
+
+select (count(*) as ?indictments)
+where {
+	?s ex:outcome ex:indictment
+}
+
+
+# List everyone who pleaded guilty, along with the name of the investigation.
+prefix ex: <http://example.org#>
+
+select * where {
+  ?investigation ex:name ?name;
+                 ex:outcome ex:guilty-plea;
+                 ex:investigation ?investigationName.
+               }
+
+# List everyone who were convicted, but who had their conviction overturned by which president.
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix ex: <http://example.org#>
+
+select ?name ?president
+where {
+  ?investigation rdf:type ex:Indictment;
+                 ex:name ?name;
+                 ex:overturned true;
+                 ex:president ?president
+
+
+}
+# For each investigation, list the number of indictments made.
+# For each investigation with multiple indictments, list the number of indictments made, sorted with the most indictments first.
+
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix ex: <http://example.org#>
+
+select ?investigationName (count(?investigationName) as ?indictments)
+where {
+  ?investigation rdf:type ex:Indictment ;
+                 ex:investigation ?investigationName .
+}
+group by ?investigationName
+order by desc(?indictments)
+
+# For each president, list the numbers of convictions and of pardons made after conviction.
+
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix ex: <http://example.org#>
+
+select ?investigationName (count(?investigationName) as ?indictments)
+where {
+  ?investigation rdf:type ex:Indictment;
+                 ex:investigation ?investigationName .
+
+}
+group by ?investigationName
+having (?indictments > 1)
+order by desc(?indictments)
+
+
+# Use a DESCRIBE query to show the updated information about Roger Stone.
+prefix ex: <http://example.org#>
+
+describe ?roger_stone
+where {
+      ?roger_stone ?p?o .
+      ex:Roger_Stone ?p ?o .
+}
+# Use a CONSTRUCT query to create a new RDF group with triples only about Roger Stone (in other words, having Roger Stone as the subject.)
+
+prefix ex: <http://example.org#>
+
+construct {?s?p?o}
+where {
+  ?s ?p ?o.
+  ex:Roger_Stone ?p ?o.
+}
+
+
+
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix ex: <http://example.org#>
+
+delete {?s ex:name ?o}
+insert {?s foaf:name ?o}
+where  {?s ex:name ?o}
